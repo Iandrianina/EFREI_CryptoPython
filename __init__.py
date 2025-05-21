@@ -20,6 +20,15 @@ def encryptage(valeur):
     valeur_bytes = valeur.encode()  # Conversion str -> bytes
     token = f.encrypt(valeur_bytes)  # Encrypt la valeur
     return f"Valeur encryptée : {token.decode()}"  # Retourne le token en str
+
+@app.route('/decrypt/<string:valeur>')
+def decryptage(valeur):
+    try:
+        valeur_bytes = valeur.encode()  # Conversion str -> bytes
+        original = f.decrypt(valeur_bytes)  # Décryptage
+        return f"Valeur décryptée : {original.decode()}"  # Retourne en str
+    except Exception as e:
+        return f"Erreur lors du déchiffrement : {str(e)}"
                                                                                                                                                      
 if __name__ == "__main__":
   app.run(debug=True)
